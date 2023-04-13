@@ -9,7 +9,12 @@ router.get("/", (req, res, next) => {
 
 router.get("/:id", (req, res, next) => {
   // TODO: complete this route
-  res.sendStatus(501);
+  let result = itemDao.getById(req.params.id);
+  if(!result) {
+    return res.sendStatus(404)
+  }
+  res.status(200).send(result);
+  //res.sendStatus(501);
 });
 
 router.post("/", (req, res, next) => {
@@ -19,12 +24,19 @@ router.post("/", (req, res, next) => {
 
 router.put("/:id", (req, res, next) => {
   // TODO: complete this route
-  res.sendStatus(501);
+  if(!req.params.id) {
+    return res.sendStatus(200)
+  }
+  itemDao.updateById(req.params.id, req.body)
+  res.sendStatus(200)
+  //res.sendStatus(501);
 });
 
 router.delete("/:id", (req, res, next) => {
   // TODO: complete this route
-  res.sendStatus(501);
+  itemDao.deleteById(req.params.id)
+  res.sendStatus(200)
+  //res.sendStatus(501);
 });
 
 module.exports = router;
