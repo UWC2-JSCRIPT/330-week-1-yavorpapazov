@@ -23,19 +23,13 @@ module.exports.deleteById = async (itemId) => {
 
 module.exports.updateById = async (itemId, newObj) => {
     // TODO: complete
-    console.log(itemId)
-    console.log(newObj)
-    console.log(itemsModel.items)
     let updatedItems = itemsModel.items.map(item => {
       if(item.id === itemId) {
-        let temp = newObj.field
-        item.field = 'updated'
-        item.newField = newObj.newField
+        item = {...newObj, id: itemId}
       }
       return item
     })
     itemsModel.items = [...updatedItems]
-    console.log(itemsModel.items)
 }
 
 module.exports.create = async (item) => {
